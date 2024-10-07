@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Giỏ hàng</title>
+  
+</head>
+<body>
+  <h1>Giỏ hàng của bạn</h1>
+  <% if (cart.length > 0) { %>
+    <ul>
+      <% cart.forEach(item => { %>
+        <li>
+          <strong><%= item.name %></strong> - 
+          Số lượng: <%= item.quantity %> - 
+          Giá: <%= item.price %> - 
+          Thành tiền: <%= item.price * item.quantity %>
+          <form action="/cart/remove" method="post" style="display:inline;">
+            <input type="hidden" name="productId" value="<%= item._id %>">
+            <button type="submit">Xóa</button>
+          </form>
+        </li>
+      <% }) %>
+    </ul>
+    <p><strong>Tổng số lượng sản phẩm:</strong> <%= cartCount %></p>
+    <p><strong>Tổng tiền:</strong> <%= totalAmount %></p>
+  <% } else { %>
+    <p>Giỏ hàng của bạn hiện đang trống.</p>
+  <% } %>
+  <a href="/products" style="margin-top: 20px; display: inline-block; padding: 10px 15px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px;">Quay về danh sách sản phẩm</a>
+</body>
+</html>
